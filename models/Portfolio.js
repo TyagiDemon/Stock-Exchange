@@ -7,9 +7,15 @@ const portfolio = new Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 		},
-        stocks: {},
-        amount_invested: Number,
-        quantity: Number
+		stocks: [
+			new Schema({
+				company: String,
+				quantity: Number,
+				price: Number,
+			}),
+		],
+		amount_invested: Number,
+		quantity: Number,
 	},
 	{
 		timestamps: true,

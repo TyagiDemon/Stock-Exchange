@@ -12,7 +12,6 @@ const orderRoutes = require("./routes/order.js");
 const historyRoutes = require("./routes/history.js");
 const portfolioRoutes = require("./routes/portfolio.js");
 
-
 app.use("/user", userRoutes);
 app.use("/wishlist", wishlistRoutes);
 app.use("/wallet", walletRoutes);
@@ -20,18 +19,14 @@ app.use("/order", orderRoutes);
 app.use("/history", historyRoutes);
 app.use("/portfolio", portfolioRoutes);
 
-
 app.use("/", (req, res) => {
-  res.send("Welcome");
+	res.send("Welcome");
 });
 const server = app.listen(process.env.PORT || 8012);
 
 server.on("listening", () => {
-  mongoose.connect(
-    `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0.unpmvga.mongodb.net/?retryWrites=true&w=majority`,
-    () => {
-      console.log("connected to mongodb server");
-    }
-  );
-  console.log(`Server is running on port ${process.env.PORT || 8012}`);
+	mongoose.connect(process.env.MONGO_URI, () => {
+		console.log("connected to mongodb server");
+	});
+	console.log(`Server is running on port ${process.env.PORT || 8012}`);
 });
