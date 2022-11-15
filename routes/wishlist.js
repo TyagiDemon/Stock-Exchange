@@ -1,33 +1,14 @@
-const Wishlist = require("../models/Wishlist.js");
 const express = require("express");
+const { get } = require("../controllers/wishlist/get.js");
+const { create } = require("../controllers/wishlist/create.js");
+const { addToWishlist } = require("../controllers/wishlist/addToWishlist.js");
+const { deleteFromWishlist } = require("../controllers/wishlist/deleteFromWishlist.js");
+
 const router = express.Router();
 
-router.post("/create", async function (req, res) {
-  try {
-    const wishlist = new Wishlist({
-      user_id: req.body.user_id,
-      stocks: [],
-    });
-
-    await wishlist.save();
-    res.status(201).json({ success: true, result: wishlist });
-  } catch (err) {
-    res
-      .status(err.status || 500)
-      .json({ success: false, message: err.message || "Something went wrong" });
-  }
-});
-router.patch("/addToWishlist", async function (req, res) {
-  try {
-    const wishlist = await Wishlist.findById(req.body.wishlist_id);
-    await wishlist.stocks.push(req.body.company);
-    await wishlist.save();
-    res.status(200).json(wishlist);
-  } catch (err) {
-    res
-      .status(err.status || 500)
-      .json({ success: false, message: err.message || "Something went wrong" });
-  }
-});
+router.get("/:id", get);
+router.post("/create", create);
+router.patch("/addToWishlist", addToWishlist);
+router.delete("/remove/:wishlist_id/:company", deleteFromWishlist);
 
 module.exports = router;
