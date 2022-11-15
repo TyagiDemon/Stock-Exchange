@@ -1,4 +1,3 @@
-const Wallet = require("../models/Wallet.js");
 const express = require("express");
 const { create } = require("../controllers/wallet/create.js");
 const { addBalance } = require("../controllers/wallet/addBalance.js");
