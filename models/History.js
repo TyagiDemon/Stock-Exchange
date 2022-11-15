@@ -7,10 +7,12 @@ const history = new Schema(
 			type: mongoose.Schema.Types.ObjectId,
 			ref: "User",
 		},
-        orders: [{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: "Order",
-		}]
+		orders: [
+			{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: "Order",
+			},
+		],
 	},
 	{
 		timestamps: true,
